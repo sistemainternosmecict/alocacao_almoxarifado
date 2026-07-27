@@ -152,6 +152,28 @@ Com a aplicação em execução, a documentação OpenAPI gerada pelo FastAPI po
 
     ReDoc: http://127.0.0.1:8000/redoc
 
-🏛️ Secretaria de Educação
+🏷️ Endpoints de Categorias (/categoria)
 
-Sistema Interno de Controle de Estoque de Almoxarifado e Alocação de Equipamentos.
+Abaixo estão detalhadas as rotas implementadas no controller de categorias de equipamentos (routers/categoria_controller.py):
+
+Método	Rota	Status Code	Descrição	Header / Retorno
+
+POST	/categoria	201 Created	Cria uma nova categoria de equipamento
+						Location header com URI do recurso criado.
+						Retorna Categoria_equipamento_response
+
+GET	/categoria	200 OK	Obtém a lista de todas as categorias cadastradas
+						Retorna List_categoria_equipamento_response
+
+GET	/categoria/{categoria_id}	200 OK	Busca os dados de uma categoria específica pelo seu ID
+										Retorna Categoria_equipamento_response
+
+DELETE	/categoria/{categoria_id}	204 No Content	Remove uma categoria de equipamento pelo seu ID	Sem corpo de resposta (Response vazio)
+
+👨💻 Responsável Técnico
+
+    Nome: Thyéz de Oliveira Monteiro
+
+    Cargo: Assessor de Informática
+
+    Setor: SMECICT (Tecnologia)
