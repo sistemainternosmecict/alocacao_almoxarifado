@@ -156,19 +156,46 @@ Com a aplicação em execução, a documentação OpenAPI gerada pelo FastAPI po
 
 Abaixo estão detalhadas as rotas implementadas no controller de categorias de equipamentos (routers/categoria_controller.py):
 
-Método	Rota	Status Code	Descrição	Header / Retorno
+```text
+Método: POST
+Rota: /categoria
+Status code: 201
 
-POST	/categoria	201 Created	Cria uma nova categoria de equipamento
-						Location header com URI do recurso criado.
-						Retorna Categoria_equipamento_response
+Headers:
+Created	Cria uma nova categoria de equipamento
+Location header com URI do recurso criado.
+Eetorna Categoria_equipamento_response
+```
 
-GET	/categoria	200 OK	Obtém a lista de todas as categorias cadastradas
-						Retorna List_categoria_equipamento_response
+```text
+Método: GET
+Rota: /categoria
+Status code: 200 OK
 
-GET	/categoria/{categoria_id}	200 OK	Busca os dados de uma categoria específica pelo seu ID
-										Retorna Categoria_equipamento_response
+Headers:
+Obtém a lista de todas as categorias cadastradas
+Retorna List_categoria_equipamento_response
+```
 
-DELETE	/categoria/{categoria_id}	204 No Content	Remove uma categoria de equipamento pelo seu ID	Sem corpo de resposta (Response vazio)
+```text
+Método: GET
+Rota: /categoria/{categoria_id}
+Status code: 200 OK
+
+Headers:
+Busca os dados de uma categoria específica pelo seu ID
+Retorna Categoria_equipamento_response
+```
+
+```text
+Método: DELETE
+Rota: /categoria/{categoria_id}
+Status code: 204
+
+Headers: No Content
+```
+
+Remove uma categoria de equipamento pelo seu ID	Sem corpo de resposta (Response vazio)
 
 👨💻 Responsável Técnico
 
