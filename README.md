@@ -130,6 +130,7 @@ A aplicação utiliza o servidor Granian:
 uv run granian --interface asgi main:app --port 8000 --access-log
 ```
 A API estará disponível por padrão em http://127.0.0.1:8000.
+
 🧪 Execução de Testes
 
 Os testes estão organizados em testes unitários (tests/unity) e de integração (tests/integration).
