@@ -7,6 +7,7 @@ requires-python = ">=3.13"
 dependencies = [
     "fastapi>=0.139.2",
     "granian>=2.7.9",
+    "pytest-cov>=7.1.0",
     "pytest>=9.1.1",
     "python-dotenv>=1.2.2",
     "supabase>=2.31.0",
@@ -14,3 +15,5 @@ dependencies = [
 ]
 [tool.pytest.ini_options]
 pythonpath = "."
+addopts = "--disable-warnings"
+filterwarnings = ["ignore"]

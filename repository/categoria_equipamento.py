@@ -28,3 +28,13 @@ class Categoria_repository:
             .execute()
         )
         return Categoria_equipamento_response(**resposta.data[0])
+
+    # Implementar a remoção de categoria
+    def remover_categoria(self, categoria_id: int):
+        resposta = (
+            self.supabase.table(self._table_name)
+            .delete()
+            .eq("categoria_id", categoria_id)
+            .execute()
+        )
+        return resposta.data
