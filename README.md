@@ -75,8 +75,12 @@ alocacao_equipamento/
 ├── uv.lock                     # Lockfile gerado pelo uv (Astral)
 └── README.md                   # Documentação do repositório
 
+```
+
+
 🛠️ Tecnologias Utilizadas
 
+```text
     Linguagem: Python 3.13+
 
     Gerenciador de Projetos e Ambientes: uv (Astral)
@@ -91,49 +95,54 @@ alocacao_equipamento/
 
     Suíte de Testes: pytest e pytest-cov
 
+```
+
 🔐 Variáveis de Ambiente
 
 Crie um arquivo .env na raiz do projeto com as credenciais do ambiente de execução:
 Snippet de código
 
+```text
 # Configurações do Supabase
 EQUIP_SUPABASE_URL=[https://sua-instancia.supabase.co](https://sua-instancia.supabase.co)
 EQUIP_SUPABASE_KEY=sua-chave-api-supabase
+```
+
 
 🚀 Instalação e Execução
 
 Este projeto utiliza o uv como gerenciador rápido de ambientes e pacotes Python.
 1. Instalar o uv (caso não possua)
-Bash
+```bash
 
 curl -LsSf [https://astral.sh/uv/install.sh](https://astral.sh/uv/install.sh) | sh
-
+```
 2. Sincronizar Dependências
-Bash
+```bash
 
 uv sync
-
+```
 3. Executar o Servidor de Desenvolvimento
 
 A aplicação utiliza o servidor Granian:
-Bash
+```bash
 
 uv run granian --interface asgi main:app --port 8000 --access-log
-
+```
 A API estará disponível por padrão em http://127.0.0.1:8000.
 🧪 Execução de Testes
 
 Os testes estão organizados em testes unitários (tests/unity) e de integração (tests/integration).
 Rodar todos os testes:
-Bash
+```bash
 
 uv run pytest tests/ -vv
-
+```
 Rodar testes gerando relatório de cobertura (pytest-cov):
-Bash
+```bash
 
 uv run pytest tests/ -vv --cov=. --cov-report=term-missing
-
+```
 📚 Documentação da API
 
 Com a aplicação em execução, a documentação OpenAPI gerada pelo FastAPI pode ser acessada em:
