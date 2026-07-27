@@ -164,7 +164,7 @@ Status code: 201
 Headers:
 Created	Cria uma nova categoria de equipamento
 Location header com URI do recurso criado.
-Eetorna Categoria_equipamento_response
+Retorna Categoria_equipamento_response
 ```
 
 ```text
@@ -192,10 +192,11 @@ Método: DELETE
 Rota: /categoria/{categoria_id}
 Status code: 204
 
-Headers: No Content
+Headers:
+Remove uma categoria de equipamento pelo seu ID	Sem corpo de resposta (Response vazio)
+Retorna No Content
 ```
 
-Remove uma categoria de equipamento pelo seu ID	Sem corpo de resposta (Response vazio)
 
 👨💻 Responsável Técnico
 
