@@ -1,7 +1,9 @@
 from repository.categoria_equipamento import Categoria_repository
-from domain.schemas.criar_categoria import Criar_categoria
-from domain.schemas.categoria_equipamento_response import Categoria_equipamento_response
-from domain.schemas.list_categorias import List_categoria_equipamento_response
+from domain.schemas.schemas import (
+    Criar_categoria,
+    Categoria_equipamento_response,
+    List_categoria_equipamento_response,
+)
 
 
 class Categoria_equipamento_service:
@@ -20,3 +22,6 @@ class Categoria_equipamento_service:
     def obter_categoria(self, categoria_id: int) -> Categoria_equipamento_response:
         response = self.repository.obter_categoria(categoria_id)
         return response
+
+    def remover_categoria(self, categoria_id: int) -> list:
+        return self.repository.remover_categoria(categoria_id)

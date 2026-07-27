@@ -1,6 +1,5 @@
 import pytest
-from domain.schemas.categoria_equipamento_response import Categoria_equipamento_response
-from domain.schemas.criar_categoria import Criar_categoria
+from domain.schemas.schemas import Categoria_equipamento_response, Criar_categoria
 from repository.categoria_equipamento import Categoria_repository
 
 

@@ -1,7 +1,6 @@
 from unittest.mock import MagicMock, patch
-from domain.schemas.criar_categoria import Criar_categoria
+from domain.schemas.schemas import Criar_categoria, Categoria_equipamento_response
 from repository.categoria_equipamento import Categoria_repository
-from domain.schemas.categoria_equipamento_response import Categoria_equipamento_response
 from repository.database import Database
 import pytest
 

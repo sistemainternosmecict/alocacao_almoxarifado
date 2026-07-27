@@ -1,7 +1,8 @@
 from repository.database import Database
-from domain.schemas.criar_categoria import Criar_categoria
-from domain.schemas.categoria_equipamento_response import Categoria_equipamento_response
-from domain.schemas.list_categorias import List_categoria_equipamento_response
+from domain.schemas.schemas import (
+    Criar_categoria,
+    Categoria_equipamento_response,
+)
 
 
 class Categoria_repository:
