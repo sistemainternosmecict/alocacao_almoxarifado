@@ -4,7 +4,7 @@ from domain.schemas.schemas import (
     Categoria_equipamento_response,
     List_categoria_equipamento_response,
 )
-from service.categoria_equipamento import Categoria_equipamento_service
+from service.service_categoria_equipamento import Categoria_equipamento_service
 
 router = APIRouter()
 

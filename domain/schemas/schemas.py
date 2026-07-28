@@ -20,7 +20,6 @@ class List_categoria_equipamento_response(BaseModel):
 
 class Criar_historico(BaseModel):
     equipamento_id: int
-    timestamp: str
     unidade: str
     setor: str
     sala: str

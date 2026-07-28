@@ -1,10 +1,10 @@
 from fastapi import FastAPI
-from routers import categoria_controller
+from routers import controller_categoria
 
 app = FastAPI(title="Almoxarifado", version="0.1")
 
 app.include_router(
-    categoria_controller.router, prefix="/api/v1", tags=["Categoria_controller"]
+    controller_categoria.router, prefix="/api/v1", tags=["Categoria_controller"]
 )
 
 

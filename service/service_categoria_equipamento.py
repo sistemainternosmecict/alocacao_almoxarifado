@@ -1,4 +1,4 @@
-from repository.categoria_equipamento import Categoria_repository
+from repository.repository_categoria import Categoria_repository
 from domain.schemas.schemas import (
     Criar_categoria,
     Categoria_equipamento_response,
