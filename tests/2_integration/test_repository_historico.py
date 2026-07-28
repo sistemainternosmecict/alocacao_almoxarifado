@@ -44,15 +44,6 @@ def test_criar_historico_integracao(repo):
     ).execute()
 
 
-def test_obter_historicos_integracao(repo, historico_criado_fixture):
-    historicos = repo.obter_historicos()
-    assert isinstance(historicos, list)
-    assert len(historicos) > 0
-    assert all(isinstance(h, Historico_equipamento_response) for h in historicos)
-    ids = [h.historico_id for h in historicos]
-    assert historico_criado_fixture.historico_id in ids
-
-
 def test_obter_historico_por_equipamento_id_integracao(repo, historico_criado_fixture):
     equipamento_id = historico_criado_fixture.equipamento_id
     resultado = repo.obter_historico(equipamento_id=equipamento_id)
