@@ -45,18 +45,16 @@ class Criar_equipamento(BaseModel):
     descricao: str
     serial: str
     patrimonio: str
-    status_equipamento: StatusEquipamento
 
 
 class Equipamento_response(BaseModel):
     equipamento_id: int
-    categoria: Categoria_equipamento_response
+    categoria_id: Categoria_equipamento_response
     nome: str
     descricao: str
     serial: str
     patrimonio: str
     status_equpamento: StatusEquipamento
-    historico: List_historico_equipamento_response
 
 
 class List_equipamento_response(BaseModel):
