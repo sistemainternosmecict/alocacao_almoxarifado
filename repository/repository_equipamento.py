@@ -26,3 +26,13 @@ class Equipamento_repository:
             .execute()
         )
         return resposta.data[0]
+
+    def atualizar_status_equipamento(self, equipamento_id: int, novo_status) -> dict:
+        resposta = (
+            self.supabase.table(self._table_name)
+            .update({"status_equipamento": novo_status})
+            .eq("equipamento_id", equipamento_id)
+            .execute()
+        )
+        print(resposta)
+        return resposta.data[0]
