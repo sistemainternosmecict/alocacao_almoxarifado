@@ -1,6 +1,6 @@
 import pytest
 from domain.schemas.schemas import Categoria_equipamento_response, Criar_categoria
-from repository.categoria_equipamento import Categoria_repository
+from repository.repository_categoria import Categoria_repository
 
 
 @pytest.fixture
