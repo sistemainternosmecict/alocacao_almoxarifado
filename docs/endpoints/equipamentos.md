@@ -1,6 +1,6 @@
 🏷️ Endpoints de Equipamentos (/equipamento)
 
-Abaixo estão detalhadas as rotas implementadas no controller de históricos de equipamentos (routers/controller_historico.py):
+Abaixo estão detalhadas as rotas implementadas no controller de equipamentos (routers/controller_equipamento.py):
 
 📚 Documentação da API
 
@@ -11,21 +11,38 @@ Com a aplicação em execução, a documentação OpenAPI gerada pelo FastAPI po
 
 ```text
 Método: POST
-Rota: /historico
+Rota: /equipamento
 Status code: 201
 
 Headers:
-Created	Cria um novo histórico de equipamento
 Location header com URI do recurso criado.
-Retorna Historico_equipamento_response
+Descrição: Cria um novo equipamento vinculando a uma categoria.
+Retorna: Equipamento_response
 ```
 
 ```text
 Método: GET
-Rota: /historico/{equipamento_id}
+Rota: /equipamento
 Status code: 200 OK
 
-Headers:
-Obtém a lista de todos os historicos cadastrados para um equipamento com base no id de equipamento
-Retorna List_historico_equipamento_response
+Descrição: Obtém a lista de todos os equipamentos cadastrados no almoxarifado, trazendo seus detalhamentos de categoria e histórico.
+Retorna: List_equipamento_response
+```
+
+```text
+Método: GET
+Rota: /equipamento/{equipamento_id}
+Status code: 200 OK
+
+Descrição: Busca os dados de um equipamento específico pelo seu ID, populando sua categoria e histórico.
+Retorna: Equipamento_response
+```
+
+```text
+Método: PUT
+Rota: /equipamento/{equipamento_id}
+Status code: 200 OK
+
+Descrição: Atualiza o status de um equipamento (novo, defeituoso, manutenção, etc).
+Retorna: Atualizar_equipamento_response
 ```
