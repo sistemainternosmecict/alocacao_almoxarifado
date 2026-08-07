@@ -1,6 +1,6 @@
 # 📦 API de Alocação de Equipamentos e Controle de Estoque (Secretaria de Educação)
 
-**Versão:** 0.8.1
+**Versão:** 0.8.2
 
 API RESTful desenvolvida para o gerenciamento interno do almoxarifado e acompanhamento de alocações de equipamentos nas unidades escolares e administrativas da **Secretaria de Educação**.
 
