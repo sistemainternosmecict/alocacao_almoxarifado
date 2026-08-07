@@ -81,3 +81,26 @@ def test_obter_equipamento_sucesso(service_mocked):
         dados_retorno_repo["equipamento_id"]
     )
     assert isinstance(resultado, Equipamento_response)
+
+def test_obter_equipamentos_exceptions(service_mocked):
+    dados_retorno_repo = [{
+        "equipamento_id": 1,
+        "categoria_id": 2,
+        "nome": "Pc",
+        "descricao": "Desc",
+        "serial": "",
+        "patrimonio": "",
+        "status_equipamento": 1,
+    }]
+    service_mocked.repository.obter_equipamentos.return_value = dados_retorno_repo
+    
+    # Forcing exceptions in obter_categoria and obter_historico
+    service_mocked.categoria.obter_categoria.side_effect = Exception("Not found")
+    service_mocked.historico.obter_historico.side_effect = Exception("Not found")
+    
+    resultado = service_mocked.obter_equipamentos()
+    
+    assert len(resultado.lista) == 1
+    equip = resultado.lista[0]
+    assert equip.categoria["categoria"] == "Desconhecida"
+    assert equip.historico == []

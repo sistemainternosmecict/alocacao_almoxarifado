@@ -55,13 +55,25 @@ class Equipamento_service:
     def obter_equipamentos(self) -> List_equipamento_response:
         equipamento_list = self.repository.obter_equipamentos()
         for equipamento in equipamento_list:
-            equipamento["categoria"] = self.categoria.obter_categoria(
-                equipamento["categoria_id"]
-            ).model_dump()
-            historico_res = self.historico.obter_historico(
-                equipamento["equipamento_id"]
-            )
-            equipamento["historico"] = historico_res.model_dump()["lista"]
+            try:
+                equipamento["categoria"] = self.categoria.obter_categoria(
+                    equipamento["categoria_id"]
+                ).model_dump()
+            except Exception:
+                equipamento["categoria"] = {
+                    "categoria_id": equipamento["categoria_id"],
+                    "categoria": "Desconhecida",
+                    "descricao_categoria": "Categoria deletada ou não encontrada",
+                }
+                
+            try:
+                historico_res = self.historico.obter_historico(
+                    equipamento["equipamento_id"]
+                )
+                equipamento["historico"] = historico_res.model_dump()["lista"]
+            except Exception:
+                equipamento["historico"] = []
+                
         contagem = len(equipamento_list)
         return List_equipamento_response(lista=equipamento_list, contagem=contagem)
 
@@ -73,4 +85,7 @@ class Equipamento_service:
         resposta = self.repository.atualizar_status_equipamento(
             equipamento_id, novo_status
         )
-        return Atualizar_equipamento_response(**resposta)
+        return Atualizar_equipamento_response(
+            novo_status=resposta.get("status_equipamento", novo_status),
+            msg="Equipamento atualizado com sucesso"
+        )

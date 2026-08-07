@@ -54,3 +54,11 @@ def test_obter_equipamento_por_id_integracao(repo, equipamento_criado_fixture):
     assert isinstance(resultado, dict)
     assert resultado["equipamento_id"] == equipamento_criado_fixture["equipamento_id"]
     assert resultado["nome"] == equipamento_criado_fixture["nome"]
+
+
+def test_atualizar_status_equipamento(repo, equipamento_criado_fixture):
+    novo_status_int = 1
+    resultado = repo.atualizar_status_equipamento(
+        equipamento_criado_fixture["equipamento_id"], novo_status_int
+    )
+    assert resultado["status_equipamento"] == novo_status_int
