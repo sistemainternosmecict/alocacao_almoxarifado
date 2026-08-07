@@ -9,8 +9,12 @@ class Alocacao_repository:
         self.supabase = self._database.obter_conexao()
 
     def criar_alocacao(self, dados: Criar_alocacao) -> dict:
+        dados_dump = dados.model_dump()
+        if hasattr(dados_dump.get("status_alocacao"), "value"):
+            dados_dump["status_alocacao"] = dados_dump["status_alocacao"].value
+            
         resposta = (
-            self.supabase.table(self._table_name).insert(dados.model_dump()).execute()
+            self.supabase.table(self._table_name).insert(dados_dump).execute()
         )
         return resposta.data[0]
 
@@ -28,6 +32,9 @@ class Alocacao_repository:
         return resposta.data[0]
 
     def atualizar_status_alocacao(self, alocacao_id: int, novo_status: int) -> dict:
+        if hasattr(novo_status, "value"):
+            novo_status = novo_status.value
+            
         resposta = (
             self.supabase.table(self._table_name)
             .update({"status_alocacao": novo_status})
