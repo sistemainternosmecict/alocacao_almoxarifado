@@ -52,29 +52,66 @@ Com base nos diagramas de caso de uso do sistema, a API atende às seguintes fun
 O projeto adota uma arquitetura em camadas bem definida (**Controller/Router → Service → Repository → Domain/Schemas**), garantindo isolamento de responsabilidades, facilidade de manutenção e facilidade para escrita de testes unitários e de integração.
 
 ```text
-alocacao_equipamento/
-├── domain/                     # DTOs e Schemas de validação de dados
-│   └── schemas/                # Models Pydantic (Request/Response)
-│       ├── categoria_equipamento_response.py
-│       ├── criar_categoria.py
-│       └── list_categorias.py
-├── repository/                 # Camada de Acesso a Dados / Integração Supabase
-│   ├── categoria_equipamento.py # Operações de banco para categorias
-│   └── database.py              # Conexão e inicialização do cliente Supabase
-├── service/                    # Regras de Negócio e Casos de Uso
-│   └── categoria_equipamento.py # Serviços da entidade categoria
-├── routers/                    # Camada HTTP / Controllers FastAPI
-│   └── categoria_controller.py  # Endpoints e tratamento de rotas
-├── tests/                      # Suíte de Testes da Aplicação
-│   ├── integration/            # Testes de integração (Repositórios e DB)
-│   │   └── test_categoria_repository.py
-│   └── unity/                  # Testes unitários (Serviços e Schemas)
-│       └── test_categoria_respository.py
-├── main.py                     # Ponto de entrada da aplicação FastAPI
-├── pyproject.toml              # Configurações do projeto e dependências
-├── uv.lock                     # Lockfile gerado pelo uv (Astral)
-└── README.md                   # Documentação do repositório
-
+├── domain
+│   ├── enums.py
+│   ├── __pycache__
+│   │   └── enums.cpython-313.pyc
+│   └── schemas
+│       ├── __pycache__
+│       │   └── schemas.cpython-313.pyc
+│       └── schemas.py
+├── main.py
+├── __pycache__
+│   └── main.cpython-313.pyc
+├── pyproject.toml
+├── README.md
+├── repository
+│   ├── database.py
+│   ├── __pycache__
+│   │   ├── database.cpython-313.pyc
+│   │   ├── repository_categoria.cpython-313.pyc
+│   │   ├── repository_equipamento.cpython-313.pyc
+│   │   └── repository_historico.cpython-313.pyc
+│   ├── repository_categoria.py
+│   ├── repository_equipamento.py
+│   └── repository_historico.py
+├── routers
+│   ├── controller_categoria.py
+│   ├── controller_historico.py
+│   └── __pycache__
+│       ├── controller_categoria.cpython-313.pyc
+│       └── controller_historico.cpython-313.pyc
+├── service
+│   ├── __pycache__
+│   │   ├── service_categoria_equipamento.cpython-313.pyc
+│   │   └── service_historico_equipamento.cpython-313.pyc
+│   ├── service_categoria_equipamento.py
+│   └── service_historico_equipamento.py
+├── tests
+│   ├── 1_unity
+│   │   ├── __pycache__
+│   │   │   ├── test_repository_categoria.cpython-313-pytest-9.1.1.pyc
+│   │   │   ├── test_repository_historico.cpython-313-pytest-9.1.1.pyc
+│   │   │   ├── test_service_categoria.cpython-313-pytest-9.1.1.pyc
+│   │   │   └── test_service_historico.cpython-313-pytest-9.1.1.pyc
+│   │   ├── test_service_categoria.py
+│   │   └── test_service_historico.py
+│   ├── 2_integration
+│   │   ├── __pycache__
+│   │   │   ├── test_repository_categoria.cpython-313-pytest-9.1.1.pyc
+│   │   │   ├── test_repository_equipamento.cpython-313-pytest-9.1.1.pyc
+│   │   │   └── test_repository_historico.cpython-313-pytest-9.1.1.pyc
+│   │   ├── test_repository_categoria.py
+│   │   ├── test_repository_equipamento.py
+│   │   └── test_repository_historico.py
+│   └── 3_e2e
+│       ├── __pycache__
+│       │   ├── test_e2e_categoria.cpython-313-pytest-9.1.1.pyc
+│       │   ├── test_e2e_hisorico.cpython-313-pytest-9.1.1.pyc
+│       │   └── test_e2e_historico.cpython-313-pytest-9.1.1.pyc
+│       ├── test_e2e_categoria.py
+│       └── test_e2e_historico.py
+└── uv.lock
 ```
 
 
@@ -116,6 +153,10 @@ Este projeto utiliza o uv como gerenciador rápido de ambientes e pacotes Python
 ```bash
 
 curl -LsSf [https://astral.sh/uv/install.sh](https://astral.sh/uv/install.sh) | sh
+
+ou
+
+pip install uv
 ```
 2. Sincronizar Dependências
 ```bash
@@ -144,64 +185,15 @@ Rodar testes gerando relatório de cobertura (pytest-cov):
 
 uv run pytest tests/ -vv --cov=. --cov-report=term-missing
 ```
-📚 Documentação da API
 
-Com a aplicação em execução, a documentação OpenAPI gerada pelo FastAPI pode ser acessada em:
+## Documentação
 
-    Swagger UI: http://127.0.0.1:8000/docs
-
-    ReDoc: http://127.0.0.1:8000/redoc
-
-🏷️ Endpoints de Categorias (/categoria)
-
-Abaixo estão detalhadas as rotas implementadas no controller de categorias de equipamentos (routers/categoria_controller.py):
-
-```text
-Método: POST
-Rota: /categoria
-Status code: 201
-
-Headers:
-Created	Cria uma nova categoria de equipamento
-Location header com URI do recurso criado.
-Retorna Categoria_equipamento_response
-```
-
-```text
-Método: GET
-Rota: /categoria
-Status code: 200 OK
-
-Headers:
-Obtém a lista de todas as categorias cadastradas
-Retorna List_categoria_equipamento_response
-```
-
-```text
-Método: GET
-Rota: /categoria/{categoria_id}
-Status code: 200 OK
-
-Headers:
-Busca os dados de uma categoria específica pelo seu ID
-Retorna Categoria_equipamento_response
-```
-
-```text
-Método: DELETE
-Rota: /categoria/{categoria_id}
-Status code: 204
-
-Headers:
-Remove uma categoria de equipamento pelo seu ID	Sem corpo de resposta (Response vazio)
-Retorna No Content
-```
+[Endpoint de categorias](docs/endpoints/categorias.md)
+[Endpoint de historicos](docs/endpoints/historicos.md)
 
 
 👨💻 Responsável Técnico
 
     Nome: Thyéz de Oliveira Monteiro
-
     Cargo: Assessor de Informática
-
-    Setor: SMECICT (Tecnologia)
+    Setor: SMECICT (Tecnologia - Sala 25)

@@ -21,7 +21,7 @@ def test_criar_historico():
 
 
 def test_obter_historico():
-    equipamento_id = 40
+    equipamento_id = 1
     response = client.get(f"/api/v1/historico/{equipamento_id}")
     data = response.json()
     assert response.status_code == status.HTTP_200_OK

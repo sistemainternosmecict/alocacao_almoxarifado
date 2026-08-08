@@ -45,18 +45,17 @@ class Criar_equipamento(BaseModel):
     descricao: str
     serial: str
     patrimonio: str
-    status_equipamento: StatusEquipamento
 
 
 class Equipamento_response(BaseModel):
     equipamento_id: int
-    categoria: Categoria_equipamento_response
+    categoria: dict[str, str | int | StatusEquipamento]
     nome: str
     descricao: str
     serial: str
     patrimonio: str
-    status_equpamento: StatusEquipamento
-    historico: List_historico_equipamento_response
+    status_equipamento: int
+    historico: list[dict[str, str | int | StatusEquipamento]]
 
 
 class List_equipamento_response(BaseModel):
@@ -65,11 +64,12 @@ class List_equipamento_response(BaseModel):
 
 
 class Atualizar_equipamento(BaseModel):
-    novo_status: StatusEquipamento
+    equipamento_id: int
+    novo_status: int
 
 
 class Atualizar_equipamento_response(BaseModel):
-    novo_status: StatusEquipamento
+    novo_status: int
     msg: str
 
 
