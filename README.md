@@ -1,5 +1,7 @@
 # 📦 API de Alocação de Equipamentos e Controle de Estoque (Secretaria de Educação)
 
+**Versão:** 0.8.2
+
 API RESTful desenvolvida para o gerenciamento interno do almoxarifado e acompanhamento de alocações de equipamentos nas unidades escolares e administrativas da **Secretaria de Educação**.
 
 ---
@@ -66,51 +68,34 @@ O projeto adota uma arquitetura em camadas bem definida (**Controller/Router →
 ├── pyproject.toml
 ├── README.md
 ├── repository
-│   ├── database.py
-│   ├── __pycache__
-│   │   ├── database.cpython-313.pyc
-│   │   ├── repository_categoria.cpython-313.pyc
-│   │   ├── repository_equipamento.cpython-313.pyc
-│   │   └── repository_historico.cpython-313.pyc
-│   ├── repository_categoria.py
-│   ├── repository_equipamento.py
-│   └── repository_historico.py
+│   ├── database.py
+│   ├── repository_alocacao.py
+│   ├── repository_categoria.py
+│   ├── repository_equipamento.py
+│   └── repository_historico.py
 ├── routers
-│   ├── controller_categoria.py
-│   ├── controller_historico.py
-│   └── __pycache__
-│       ├── controller_categoria.cpython-313.pyc
-│       └── controller_historico.cpython-313.pyc
+│   ├── controller_alocacao.py
+│   ├── controller_categoria.py
+│   └── controller_historico.py
 ├── service
-│   ├── __pycache__
-│   │   ├── service_categoria_equipamento.cpython-313.pyc
-│   │   └── service_historico_equipamento.cpython-313.pyc
-│   ├── service_categoria_equipamento.py
-│   └── service_historico_equipamento.py
+│   ├── service_alocacao.py
+│   ├── service_categoria_equipamento.py
+│   └── service_historico_equipamento.py
 ├── tests
-│   ├── 1_unity
-│   │   ├── __pycache__
-│   │   │   ├── test_repository_categoria.cpython-313-pytest-9.1.1.pyc
-│   │   │   ├── test_repository_historico.cpython-313-pytest-9.1.1.pyc
-│   │   │   ├── test_service_categoria.cpython-313-pytest-9.1.1.pyc
-│   │   │   └── test_service_historico.cpython-313-pytest-9.1.1.pyc
-│   │   ├── test_service_categoria.py
-│   │   └── test_service_historico.py
-│   ├── 2_integration
-│   │   ├── __pycache__
-│   │   │   ├── test_repository_categoria.cpython-313-pytest-9.1.1.pyc
-│   │   │   ├── test_repository_equipamento.cpython-313-pytest-9.1.1.pyc
-│   │   │   └── test_repository_historico.cpython-313-pytest-9.1.1.pyc
-│   │   ├── test_repository_categoria.py
-│   │   ├── test_repository_equipamento.py
-│   │   └── test_repository_historico.py
-│   └── 3_e2e
-│       ├── __pycache__
-│       │   ├── test_e2e_categoria.cpython-313-pytest-9.1.1.pyc
-│       │   ├── test_e2e_hisorico.cpython-313-pytest-9.1.1.pyc
-│       │   └── test_e2e_historico.cpython-313-pytest-9.1.1.pyc
-│       ├── test_e2e_categoria.py
-│       └── test_e2e_historico.py
+│   ├── 1_unity
+│   │   ├── test_service_alocacao.py
+│   │   ├── test_service_categoria.py
+│   │   └── test_service_historico.py
+│   ├── 2_integration
+│   │   ├── test_repository_alocacao.py
+│   │   ├── test_repository_categoria.py
+│   │   ├── test_repository_equipamento.py
+│   │   └── test_repository_historico.py
+│   └── 3_e2e
+│       ├── test_e2e_alocacao.py
+│       ├── test_e2e_categoria.py
+│       ├── test_e2e_equipamento.py
+│       └── test_e2e_historico.py
 └── uv.lock
 ```
 
@@ -174,7 +159,7 @@ A API estará disponível por padrão em http://127.0.0.1:8000.
 
 🧪 Execução de Testes
 
-Os testes estão organizados em testes unitários (tests/unity) e de integração (tests/integration).
+Os testes estão organizados em testes unitários (`tests/1_unity`), de integração (`tests/2_integration`) e testes de fluxo ponta-a-ponta (`tests/3_e2e`).
 Rodar todos os testes:
 ```bash
 
@@ -188,9 +173,13 @@ uv run pytest tests/ -vv --cov=. --cov-report=term-missing
 
 ## Documentação
 
-[Endpoint de categorias](docs/endpoints/categorias.md)
-[Endpoint de historicos](docs/endpoints/historicos.md)
+Temos as documentações detalhadas de cada domínio de recursos:
+- [Documentação de Categorias](docs/endpoints/categorias.md)
+- [Documentação de Históricos](docs/endpoints/historicos.md)
+- [Documentação de Equipamentos](docs/endpoints/equipamentos.md)
+- [Documentação de Alocações](docs/endpoints/alocacoes.md)
 
+---
 
 👨💻 Responsável Técnico
 

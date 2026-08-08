@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from routers import controller_categoria
 from routers import controller_historico
 from routers import controller_equipamento
+from routers import controller_alocacao
 
 app = FastAPI(title="Almoxarifado", version="0.1")
 
@@ -13,6 +14,9 @@ app.include_router(
 )
 app.include_router(
     controller_equipamento.router, prefix="/api/v1", tags=["Equipamento_controller"]
+)
+app.include_router(
+    controller_alocacao.router, prefix="/api/v1", tags=["Alocacao_controller"]
 )
 
 

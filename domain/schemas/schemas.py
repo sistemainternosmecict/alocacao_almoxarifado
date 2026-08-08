@@ -77,6 +77,7 @@ class Criar_alocacao(BaseModel):
     quantidade: int
     observacoes: str
     status_alocacao: StatusAlocacao
+    equipamentos: list[int]
 
 
 class Alocacao_response(BaseModel):
@@ -84,7 +85,7 @@ class Alocacao_response(BaseModel):
     quantidade: int
     observacoes: str
     status_alocacao: StatusAlocacao
-    equipamento_id: int
+    equipamentos: list[dict]
 
 
 class List_alocacao_response(BaseModel):
@@ -93,6 +94,7 @@ class List_alocacao_response(BaseModel):
 
 
 class Atualizar_alocacao(BaseModel):
+    alocacao_id: int
     novo_status: StatusAlocacao
 
 
