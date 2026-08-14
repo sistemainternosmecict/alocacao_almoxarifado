@@ -90,7 +90,7 @@ class Alocacao_response(BaseModel):
     quantidade: int
     observacoes: str
     status_alocacao: StatusAlocacao
-    equipamentos: list[dict]
+    equipamentos: list
 
 
 class List_alocacao_response(BaseModel):
@@ -99,7 +99,6 @@ class List_alocacao_response(BaseModel):
 
 
 class Atualizar_alocacao(BaseModel):
-    alocacao_id: int
     novo_status: StatusAlocacao
 
 

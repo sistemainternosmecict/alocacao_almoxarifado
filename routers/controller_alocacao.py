@@ -23,9 +23,7 @@ def criar_alocacao(
     alocacao_service = Alocacao_equipamento_service()
     service_response = alocacao_service.criar_alocacao(alocacao)
     location = str(
-        request.url_for(
-            "obter_alocacao", alocacao_id=service_response.alocacao_id
-        )
+        request.url_for("obter_alocacao", alocacao_id=service_response.alocacao_id)
     )
     response.headers["Location"] = location
     return service_response
@@ -66,7 +64,7 @@ def atualizar_alocacao(
     dados: Atualizar_alocacao,
 ) -> Atualizar_alocacao_response:
     # Ensure ID matches payload
-    dados.alocacao_id = alocacao_id
+    dados_atualizados = dados.model_copy(update={"alocacao_id": alocacao_id})
     alocacao_service = Alocacao_equipamento_service()
-    service_response = alocacao_service.atualizar_status_alocacao(dados)
+    service_response = alocacao_service.atualizar_status_alocacao(dados_atualizados)
     return service_response.model_dump()
