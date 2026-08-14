@@ -83,3 +83,19 @@ def test_atualizar_equipamento(equipamento_criado):
     data = response.json()
     assert "novo_status" in data
     assert data["novo_status"] == 1
+
+
+def test_atualizar_registros_equipamento(equipamento_criado):
+    eq_id = equipamento_criado["equipamento_id"]
+    payload = {
+        "serial": "NEW-SERIAL",
+        "patrimonio": "NEW-PATRIMONIO"
+    }
+    
+    response = client.put(f"/api/v1/equipamento/registro/{eq_id}", json=payload)
+    
+    assert response.status_code == status.HTTP_200_OK
+    data = response.json()
+    assert data["equipamento_id"] == eq_id
+    assert data["serial"] == "NEW-SERIAL"
+    assert data["patrimonio"] == "NEW-PATRIMONIO"

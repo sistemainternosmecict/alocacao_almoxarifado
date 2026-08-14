@@ -1,5 +1,5 @@
 import pytest
-from domain.schemas.schemas import Equipamento_response, Criar_equipamento
+from domain.schemas.schemas import Equipamento_response, Criar_equipamento, Atualizar_equipamento_numeros
 from domain.enums import StatusEquipamento
 from repository.repository_equipamento import Equipamento_repository
 
@@ -62,3 +62,18 @@ def test_atualizar_status_equipamento(repo, equipamento_criado_fixture):
         equipamento_criado_fixture["equipamento_id"], novo_status_int
     )
     assert resultado["status_equipamento"] == novo_status_int
+
+
+def test_atualizar_registros_unicos_integracao(repo, equipamento_criado_fixture):
+    novo_serial = "SN-NEW-123"
+    novo_patrimonio = "PAT-NEW-123"
+    dados = Atualizar_equipamento_numeros(
+        serial=novo_serial,
+        patrimonio=novo_patrimonio
+    )
+    resultado = repo.atualizar_registros_unicos(
+        equipamento_criado_fixture["equipamento_id"], dados
+    )
+    assert resultado["serial"] == novo_serial
+    assert resultado["patrimonio"] == novo_patrimonio
+    assert resultado["equipamento_id"] == equipamento_criado_fixture["equipamento_id"]

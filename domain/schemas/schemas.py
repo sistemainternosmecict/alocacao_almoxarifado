@@ -68,6 +68,11 @@ class Atualizar_equipamento(BaseModel):
     novo_status: int
 
 
+class Atualizar_equipamento_numeros(BaseModel):
+    serial: str
+    patrimonio: str
+
+
 class Atualizar_equipamento_response(BaseModel):
     novo_status: int
     msg: str

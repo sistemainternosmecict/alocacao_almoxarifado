@@ -1,5 +1,5 @@
 from repository.database import Database
-from domain.schemas.schemas import Criar_equipamento, Equipamento_response
+from domain.schemas.schemas import Criar_equipamento, Atualizar_equipamento_numeros
 
 
 class Equipamento_repository:
@@ -33,6 +33,17 @@ class Equipamento_repository:
         resposta = (
             self.supabase.table(self._table_name)
             .update({"status_equipamento": novo_status})
+            .eq("equipamento_id", equipamento_id)
+            .execute()
+        )
+        return resposta.data[0]
+
+    def atualizar_registros_unicos(
+        self, equipamento_id: int, dados: Atualizar_equipamento_numeros
+    ) -> dict:
+        resposta = (
+            self.supabase.table(self._table_name)
+            .update(dados.model_dump())
             .eq("equipamento_id", equipamento_id)
             .execute()
         )

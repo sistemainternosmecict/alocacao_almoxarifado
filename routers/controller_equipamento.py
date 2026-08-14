@@ -5,6 +5,7 @@ from domain.schemas.schemas import (
     List_equipamento_response,
     Atualizar_equipamento,
     Atualizar_equipamento_response,
+    Atualizar_equipamento_numeros,
 )
 from service.service_equipamento import Equipamento_service
 
@@ -66,4 +67,20 @@ def atualizar_equipamento(
 ) -> Atualizar_equipamento_response:
     equipamento_service = Equipamento_service()
     service_response = equipamento_service.atualizar_status_equipamento(dados)
+    return service_response.model_dump()
+
+
+@router.put(
+    "/equipamento/registro/{equipamento_id}",
+    response_model=Equipamento_response,
+    status_code=status.HTTP_200_OK,
+    summary="Atualizar patrimônio e serial de um equipamento pelo id",
+)
+def atualizar_registros_equipamento(
+    equipamento_id: int, dados: Atualizar_equipamento_numeros
+) -> Equipamento_response:
+    equipamento_service = Equipamento_service()
+    service_response = equipamento_service.atualizar_registros_unicos(
+        equipamento_id, dados
+    )
     return service_response.model_dump()

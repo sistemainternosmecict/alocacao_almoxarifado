@@ -6,6 +6,7 @@ from domain.schemas.schemas import (
     Criar_equipamento,
     Equipamento_response,
     List_historico_equipamento_response,
+    Atualizar_equipamento_numeros,
 )
 from service.service_equipamento import Equipamento_service
 
@@ -104,3 +105,39 @@ def test_obter_equipamentos_exceptions(service_mocked):
     equip = resultado.lista[0]
     assert equip.categoria["categoria"] == "Desconhecida"
     assert equip.historico == []
+
+
+def test_atualizar_registros_unicos_sucesso(service_mocked):
+    mock_dados = {
+        "serial": "SR-001",
+        "patrimonio": "PT-001"
+    }
+    atualizar = Atualizar_equipamento_numeros(**mock_dados)
+    
+    dados_retorno_repo = {
+        "equipamento_id": 1,
+        "categoria_id": 2,
+        "nome": "Pc da categoria 2",
+        "descricao": "Descricao 2",
+        "serial": "SR-001",
+        "patrimonio": "PT-001",
+        "status_equipamento": 1,
+    }
+    service_mocked.repository.atualizar_registros_unicos.return_value = dados_retorno_repo
+    
+    mock_categoria = MagicMock()
+    mock_categoria.model_dump.return_value = {"categoria_id": 2, "nome": "Categoria 2"}
+    service_mocked.categoria.obter_categoria.return_value = mock_categoria
+    
+    mock_historico = MagicMock()
+    mock_historico.model_dump.return_value = {"lista": [], "contagem": 0}
+    service_mocked.historico.obter_historico.return_value = mock_historico
+    
+    resultado = service_mocked.atualizar_registros_unicos(dados_retorno_repo["equipamento_id"], atualizar)
+    
+    service_mocked.repository.atualizar_registros_unicos.assert_called_once_with(
+        dados_retorno_repo["equipamento_id"], atualizar
+    )
+    assert isinstance(resultado, Equipamento_response)
+    assert resultado.serial == "SR-001"
+    assert resultado.patrimonio == "PT-001"

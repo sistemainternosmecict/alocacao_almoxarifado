@@ -4,6 +4,7 @@ from domain.schemas.schemas import (
     List_equipamento_response,
     Atualizar_equipamento,
     Atualizar_equipamento_response,
+    Atualizar_equipamento_numeros,
 )
 from domain.enums import StatusEquipamento
 from repository.repository_equipamento import Equipamento_repository
@@ -89,3 +90,18 @@ class Equipamento_service:
             novo_status=resposta.get("status_equipamento", novo_status),
             msg="Equipamento atualizado com sucesso"
         )
+
+    def atualizar_registros_unicos(
+        self, equipamento_id: int, dados: Atualizar_equipamento_numeros
+    ) -> Equipamento_response:
+        equipamento_dict = self.repository.atualizar_registros_unicos(
+            equipamento_id, dados
+        )
+        equipamento_dict["categoria"] = self.categoria.obter_categoria(
+            equipamento_dict["categoria_id"]
+        ).model_dump()
+        historico_res = self.historico.obter_historico(
+            equipamento_dict["equipamento_id"]
+        )
+        equipamento_dict["historico"] = historico_res.model_dump()["lista"]
+        return Equipamento_response(**equipamento_dict)
